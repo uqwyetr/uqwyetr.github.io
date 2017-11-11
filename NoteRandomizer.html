@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Note Randomizer</title>
+</head>
+<style>
+    body {
+        text-align: center;
+    }
+
+    #notes {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: 10px;
+        font-family: sans-serif;
+        font-size: 1.3rem;
+        height: 300px;
+        color: #555;
+    }
+   
+
+    button {
+        background: mediumaquamarine;
+        border: none;
+        border-radius: 3px;
+        font-size: 1.1rem;
+        padding: 5px 12px;
+        color: white;
+    }
+</style>
+
+<body>
+    <div id="notes"></div>
+    <button onclick="randomizeNotes(allNotes)">All</button>
+    <button onclick="randomizeNotes(naturalNotes)">Natural</button>
+    <button onclick="single(allNotes)">Single (All)</button>
+    <button onclick="single(naturalNotes)">Single (Natural)</button>
+</body>
+
+<script>
+    var naturalNotes = ["A", "B", "C", "D", "E", "F", "G"];
+    var allNotes = ["A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"];
+
+    function shuffle(b) {
+        var a = b;
+        var j, x, i;
+        for (i = a.length - 1; i > 0; i--) {
+            j = Math.floor(Math.random() * (i + 1));
+            x = a[i];
+            a[i] = a[j];
+            a[j] = x;
+        }
+        return a;
+    }
+
+    function randomizeNotes(notes) {
+        var notesDiv = document.getElementById("notes");
+        var _notes = notes;
+        var notesInnerHtml = "";
+
+        shuffle(_notes);
+
+        _notes.forEach(function (el) {
+            notesInnerHtml += "<div>" + el + "</div>";
+        });
+
+        notesDiv.innerHTML = notesInnerHtml;
+    }
+
+    function single(notes) {
+        var notesDiv = document.getElementById("notes");
+        
+        var index = Math.floor(Math.random() * notes.length);
+        console.log(index);
+        notesDiv.innerHTML = "<div>" + notes[index] + "</div>";
+        
+    }
+    randomizeNotes(naturalNotes);
+
+
+</script>
+
+</html>
